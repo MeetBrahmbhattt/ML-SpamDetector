@@ -6,16 +6,11 @@
 </head>
 <body>
 
-	<header>
-		<div class="container">
-		<div id="brandname">
-			ML App
-		</div>
-		<h2>Spam Detection For Youtube Comments</h2>
-		
+	<div class="container">
+		<p>Spam detection for Comments on youtube/twitter</p>
 	</div>
-	</header>
-	<p style="color:blue;font-size:20;text-align: center;"><b>Results for Comment</b></p>
+
+	<p style="color:black;font-size:20;text-align: center;"><b>Results for Comment</b></p>
 	<div class="results">
 
 
@@ -23,7 +18,7 @@
 	{% if prediction == 1%}
 	<h2 style="color:red;">Spam</h2>
 	{% elif prediction == 0%}
-	<h2 style="color:blue;">Not a Spam (It is a Ham)</h2>
+	<h2 style="color:green;">Not a Spam</h2>
 	{% endif %}
 
 	</div>

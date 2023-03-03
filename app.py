@@ -16,32 +16,26 @@ def home():
 def predict():
 	df= pd.read_csv("Youtube04-Eminem.csv")
 	df_data = df[["CONTENT","CLASS"]]
-	# Features and Labels
+	
 	df_x = df_data['CONTENT']
 	df_y = df_data.CLASS
-    # Extract Feature With CountVectorizer
-	corpus = df_x
+	data_strings = df_x
 	cv = CountVectorizer()
-	X = cv.fit_transform(corpus) # Fit the Data
+	X = cv.fit_transform(data_strings) 
 	from sklearn.model_selection import train_test_split
-	X_train, X_test, y_train, y_test = train_test_split(X, df_y, test_size=0.33, random_state=42)
-	#Naive Bayes Classifier
+	X_train, X_test, y_train, y_test = train_test_split(X, df_y, test_size=0.20, random_state=42)
+    
 	from sklearn.naive_bayes import MultinomialNB
-	clf = MultinomialNB()
-	clf.fit(X_train,y_train)
-	clf.score(X_test,y_test)
-	#Alternative Usage of Saved Model
-	# ytb_model = open("naivebayes_spam_model.pkl","rb")
-	# clf = joblib.load(ytb_model)
+	naive_bayes = MultinomialNB()
+	naive_bayes.fit(X_train,y_train)
+	naive_bayes.score(X_test,y_test)
 
 	if request.method == 'POST':
 		comment = request.form['comment']
 		data = [comment]
 		vect = cv.transform(data).toarray()
-		my_prediction = clf.predict(vect)
+		my_prediction = naive_bayes.predict(vect)
 	return render_template('result.html',prediction = my_prediction)
-
-
 
 if __name__ == '__main__':
 	app.run(debug=True)
