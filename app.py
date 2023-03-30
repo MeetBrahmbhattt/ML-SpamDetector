@@ -21,6 +21,8 @@ naive_bayes = MultinomialNB()
 naive_bayes.fit(X_train,y_train)
 naive_bayes.score(X_test,y_test)
 
+pickle.dump(naive_bayes, open('model.pkl', 'wb'))
+model = pickle.load(open('model.pkl','rb'))
 app = Flask(__name__)
 
 @app.route('/')
@@ -33,7 +35,7 @@ def predict():
 		comment = request.form['comment']
 		data = [comment]
 		vect = cv.transform(data).toarray()
-		my_prediction = naive_bayes.predict(vect)
+		my_prediction = model.predict(vect)
 	return render_template('result.html',prediction = my_prediction)
 
 if __name__ == '__main__':
