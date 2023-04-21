@@ -49,6 +49,7 @@ body{
 .ml-container{
 	display: flex;
 	justify-content: center;
+  flex-direction: column;
 }
 .main-header{
 			text-align:center;
@@ -189,4 +190,6 @@ body {
   }
 }
 
-
+.upload, .file-upload{
+  margin-top: 45px;
+}
